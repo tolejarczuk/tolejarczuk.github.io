@@ -28,11 +28,21 @@ tags: null
 
 # Tematy na stronę
 
-## Promocje
+## Zniżki
 
-* Zapisy do newslettera 5 euro, próg 50 euro
+* `Zapisy do newslettera 5 euro, próg 50 euro`
+* `Promka na wszystko na otwarcie 10% na wszystko`
+* `Weekend darmowej wysyłki`
+* `Flash sales`
+* `Kody ze zniżkami na kolejne zakupy za min x`
+* `Zniżka 3 + 1`
+* `Zniżki tylko dla newsletterów`
+* `Program lojalnościowy, punkty`
 
-### Promka na wszystko na otwarcie 10% na wszystko
+## Promocja
+
+* `Akcja charytatywna, 10% z zysków na kampanię charytatywną`
+* 
 
 ---
 
