@@ -1,0 +1,4 @@
+baseURL = 'https://tolejarczuk.github.io'
+languageCode = 'en-us'
+title = 'My Digital Garden'
+theme = 'papermod'

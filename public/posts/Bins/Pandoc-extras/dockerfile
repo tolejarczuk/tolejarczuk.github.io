@@ -1,0 +1,10 @@
+FROM pandoc/extra:latest
+
+# Install Python and pip
+RUN apk add --update --no-cache python3 py3-pip
+
+# Install pandocfilters
+RUN pip install pandocfilters
+
+# Copy your custom filter script into the container
+COPY ignore_filter.py /ignore_filter.py
