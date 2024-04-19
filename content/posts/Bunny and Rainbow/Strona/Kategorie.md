@@ -36,7 +36,7 @@ tags: null
 ## 2. Rozmiar
 
 * newborn do 62
-* baby
+* baby 68 - 
 
 ## 3. Rodzaj
 
