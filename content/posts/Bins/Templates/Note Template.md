@@ -1,6 +1,6 @@
 ---
 created: <% tp.file.creation_date() %>
-share: true
+share: false
 dg-publish: false
 dg-home: false
 author: Tomasz Olejarczuk
