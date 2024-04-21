@@ -1,8 +1,5 @@
 ---
 created: 2024-01-09 11:49
-share: true
-dg-publish: false
-dg-home: false
 author: Tomasz Olejarczuk
 title: Adding user to sudoers
 date: 09-01-2024
@@ -28,7 +25,7 @@ tags:
 - linux
 - devops
 - public
-updated: 2024-04-21T22:04
+updated: 2024-04-21T22:32
 ---
 
 # Adding user to sudoers

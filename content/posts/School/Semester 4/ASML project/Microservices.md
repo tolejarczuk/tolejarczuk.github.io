@@ -1,8 +1,5 @@
 ---
 created: 2023-12-14 14:09
-share: true
-dg-publish: false
-dg-home: false
 author: Tomasz Olejarczuk
 title: Microservices
 date: 14-12-2023
@@ -35,6 +32,7 @@ tags:
 - school_paper
 - semester4
 - public
+updated: 2024-04-21T22:32
 ---
 
 # Microservices

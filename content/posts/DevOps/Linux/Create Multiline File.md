@@ -1,7 +1,6 @@
 ---
 created: 2023-12-06 09:56
 modified: Wednesday, 6th December 2023, 09:56:05
-share: true
 tags:
 - devops
 - linux

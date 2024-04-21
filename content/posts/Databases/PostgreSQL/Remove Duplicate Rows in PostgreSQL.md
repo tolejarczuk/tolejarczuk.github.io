@@ -1,8 +1,5 @@
 ---
 created: 2024-04-17 12:30
-share: true
-dg-publish: false
-dg-home: false
 author: Tomasz Olejarczuk
 title: Remove duplicate entries
 date: 17-04-2024
@@ -27,6 +24,7 @@ tags:
 - database
 - sql
 - public
+updated: 2024-04-21T22:32
 ---
 
 # Remove Duplicate Rows in PostgreSQL
