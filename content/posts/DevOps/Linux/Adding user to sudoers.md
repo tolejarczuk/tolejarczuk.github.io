@@ -28,9 +28,10 @@ tags:
 - linux
 - devops
 - public
+updated: 2024-04-21T22:04
 ---
 
-# Adding a User to Sudoers in /etc/sudoers.d/
+# Adding user to sudoers
 
 This guide provides a one-liner to add a user to the sudoers file in a secure and organized way. Instead of modifying the main `/etc/sudoers` file directly, we'll create a new file in the `/etc/sudoers.d/` directory.
 
