@@ -1,7 +1,6 @@
 ---
 created: 2023-12-06 15:27
 modified: Wednesday, 6th December 2023, 15:27:27
-share: null
 tags:
 - devops
 - ansible
@@ -9,7 +8,7 @@ tags:
 title: Ansible
 date: 19-04-2024
 icon: null
-updated: 2024-04-21T22:07
+updated: 2024-04-21T22:24
 ---
 
 # Ansible
