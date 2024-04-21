@@ -1,5 +1,5 @@
 ---
-created: 2024-04-22 01:16
+created: 2024-04-22 01:19
 author: Tomasz Olejarczuk
 title: Documentation
 date: 22-04-2024
@@ -21,11 +21,21 @@ footer-left: \thetitle
 footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-04-22T01:16
-modified: Monday, 22nd April 2024, 01:16:50
+updated: 2024-04-22T01:21
+modified: Monday, 22nd April 2024, 01:19:02
 ---
 
-# Note Template
+# Documentation
+
+## Things to write about
+
+* My struggle with Matlab and why I chose the current solution
+* Present standalone server solution Matlab
+* Present Production server solution Matlab
+* Write about CI/CD pipelines in place
+* Write about docker
+* Write about kubernetes
+* Suggest kubernetes as a deployment platform for the project so it could monitor the docker deployments
 
 ---
 
