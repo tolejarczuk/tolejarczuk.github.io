@@ -8,6 +8,8 @@ tags:
 - public
 title: Ansible
 date: 19-04-2024
+icon: null
+updated: 2024-04-21T22:07
 ---
 
 # Ansible
