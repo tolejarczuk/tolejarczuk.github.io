@@ -20,10 +20,10 @@ header-left: \hspace{1cm}
 header-center: \leftmark
 header-right: Page \thepage
 footer-left: \thetitle
-footer-center: Fontys
+footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-04-23T16:48
+updated: 2024-04-23T16:53
 ---
 
 # CI/CD Pipeline for MATLAB Algorithm Deployment
@@ -48,11 +48,35 @@ This document outlines the CI/CD (Continuous Integration/Continuous Delivery) pi
 
 # 3. Workflow Overview
 
-* **Trigger:** Explain the event that initiates the pipeline, which in your case, is pushing code to the 'main' branch on GitHub.
-* **High-Level Steps:** Provide a simplified list of the main stages executed in the pipeline, such as:
-  1. Versioning
-  1. Building Docker Images
-  1. Tagging and Pushing Images
+**Trigger:**
+
+* The CI/CD pipeline is initiated whenever new code is pushed to the 'main' branch of the GitHub repository.
+
+**High-Level Steps:**
+
+1. **Semantic Versioning:**
+   
+   * The pipeline determines the appropriate version increment (major, minor, or patch) based on the nature of the committed changes.
+   * A new version tag is generated and applied to the Docker image.
+1. **Docker Image Build:**
+   
+   * **Base Image (if needed):** The pipeline checks if a base image with the required MATLAB runtime dependencies exists. If not, a new base image is built.
+   * **Runtime Image (if needed):** The pipeline checks if a runtime image exists; if not, it's created. This image potentially layers on top of the base image.
+   * **Algorithm Image:** The MATLAB algorithm code is packaged into a Docker image, leveraging the runtime (and potentially the base) image as its foundation. This final artifact is given the new version tag and a "latest" tag.
+1. **Image Publishing:**
+   
+   * The newly built and tagged Docker image containing the MATLAB algorithm is pushed to the GitHub Container Registry (GHCR).
+
+````mermaid
+graph TD
+    A[Code Push to 'main'] --> B[Versioning] 
+    B --> C[Build Base Image]
+    B --> D[Build Runtime Image]
+    B --> E[Build Algorithm Image] 
+    C --> F[Push Base Image]
+    D --> F[Push Runtime Image]
+    E --> F[Push Algorithm Image]
+````
 
 # 4. Pipeline Breakdown (Detailed)
 
