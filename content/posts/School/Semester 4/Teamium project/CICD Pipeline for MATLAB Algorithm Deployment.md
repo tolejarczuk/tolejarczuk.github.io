@@ -23,17 +23,30 @@ footer-left: \thetitle
 footer-center: Fontys
 footer-right: \theauthor
 tags: null
-updated: 2024-04-23T16:43
+updated: 2024-04-23T16:48
 ---
 
 # CI/CD Pipeline for MATLAB Algorithm Deployment
 
-# 1. Introduction
+# 1. Summary
 
-* **Purpose:** Briefly state the goals of the CI/CD pipeline, including automated building, testing (if applicable), and deployment of your MATLAB algorithm.
-* **Scope:** Mention the project's components involved in the pipeline. (e.g., MATLAB code, Docker images)
+This document outlines the CI/CD (Continuous Integration/Continuous Delivery) pipeline implemented for the MATLAB algorithm project. Utilizing GitHub Actions, the pipeline automates the process of building, versioning and deploying Docker images containing the MATLAB algorithm to the GitHub Container Registry (GHCR). The pipeline is triggered whenever changes are pushed to the 'main' branch, ensuring that the latest version of the algorithm is readily available for deployment, streamlining the development and release process.
 
-# 2. Workflow Overview
+# 2. Introduction
+
+**Purpose:** The CI/CD pipeline aims to streamline the development and deployment workflow for the MATLAB algorithm project. Key objectives include:
+
+* **Automation:** Automate the repetitive tasks of building, testing (if applicable), versioning, and publishing Docker images, reducing manual intervention and potential errors.
+* **Consistency:** Enforce a consistent pipeline process, ensuring builds and deployments follow predefined steps, promoting reliability.
+* **Agility:** Enable frequent updates to the MATLAB algorithm with the confidence that automated processes will build and deploy changes seamlessly.
+
+**Scope:** The pipeline focuses on the following key components:
+
+* **MATLAB Code Repository:** The source code for the MATLAB algorithm, hosted on GitHub.
+* **Docker Images:** The containerized format used to package and deploy the MATLAB algorithm.
+* **GitHub Container Registry (GHCR):** The repository for storing the built Docker images.
+
+# 3. Workflow Overview
 
 * **Trigger:** Explain the event that initiates the pipeline, which in your case, is pushing code to the 'main' branch on GitHub.
 * **High-Level Steps:** Provide a simplified list of the main stages executed in the pipeline, such as:
@@ -41,7 +54,7 @@ updated: 2024-04-23T16:43
   1. Building Docker Images
   1. Tagging and Pushing Images
 
-# 3. Pipeline Breakdown (Detailed)
+# 4. Pipeline Breakdown (Detailed)
 
 Provide a detailed explanation of each job and its corresponding steps in your GitHub Actions workflow file:
 
@@ -81,7 +94,7 @@ Provide a detailed explanation of each job and its corresponding steps in your G
 
 Last Modified: `=dateformat(this.file.mtime, "DDDD, HH:mm")`
 
-#### Tags:
+#### 0.1.1. Tags:
 
 `=this.file.tags`
 
