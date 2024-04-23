@@ -23,7 +23,7 @@ footer-left: \thetitle
 footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-04-23T16:58
+updated: 2024-04-23T17:08
 ---
 
 # CI/CD Pipeline for MATLAB Algorithm Deployment
@@ -78,37 +78,144 @@ graph TD
     E --> F[Push Algorithm Image]
 ````
 
-
+![](Bins/Images/mermaid_cicd.png)
 
 # 4. Pipeline Breakdown (Detailed)
 
-Provide a detailed explanation of each job and its corresponding steps in your GitHub Actions workflow file:
-
 **Job: push-matlab-algorithm-image**
 
-* **runs-on:** Clarify the execution environment (ubuntu-latest)
-* **steps:**
-  * **Checkout:** Explain the purpose of checking out the project code.
-  * **Semantic Versioning:** Detail the process used for version increment (e.g., major, minor, patch) and how the "anothrNick/github-tag-action" determines and applies new tags.
-  * **GitHub Container Registry (GHCR) Login:** Describe authentication for pushing images to GHCR.
-  * **Build Runtime Base Image:**
-    * Outline conditional logic: Build only if the image doesn't exist with the specified tag.
-    * Explain the `Dockerfile.deps` purpose (likely installing MATLAB runtime dependencies).
-  * **Build Runtime Image:**
-    * Similarly, describe the conditional build and the role of `Dockerfile.runtime`.
-  * **Build Inventory Image:**
-    * Explain how this step bundles the algorithm, potentially using the previously built runtime images.
-    * Highlight the tagging strategy: the new semantic version and the 'latest' tag.
-  * **Push Inventory Image:** Describe the process of publishing the built and tagged images to GHCR.
+* **runs-on:** ubuntu-latest
+  * The pipeline executes within an Ubuntu-based environment.
 
-# 4. Deployment
+**Steps**
 
-* **Strategy:** Explain how the built Docker images are deployed. Do you utilize a separate workflow? Are they deployed manually, or do you use Kubernetes or another orchestration tool?
+1. **Checkout** (`actions/checkout@v4`)
+   
+   * Retrieves a copy of your project's code from the GitHub repository. This is essential for subsequent build steps.
+1. **Semantic Versioning** (`anothrNick/github-tag-action@1.69.0`)
+   
+   * **Key Tasks:**
+     * Examines the nature of changes in the code push to determine the appropriate version increment (e.g., major.minor.patch).
+     * Generates a new unique version tag to be applied to the Docker image.
+   * **Note:** Explain how `anothrNick/github-tag-action` integrates with your code analysis or the commit message conventions you might use to drive versioning logic.
+1. **GitHub Container Registry (GHCR) Login** (`docker/login-action@v3`)
+   
+   * Authenticates with GHCR using your GitHub credentials. This grants permission to push images in subsequent steps.
+1. **Build Runtime Base Image**
+   
+   * **Conditional Logic:** If the `ghcr.io/teamiumdev/matlabruntimebase:r2024a` image doesn't already exist, it is built.
+   * **Dockerfile:** This build is directed by `Dockerfile.deps`.
+   * **Purpose:** This image installs MATLAB Runtime dependencies, providing a common foundation for later builds.
+1. **Build Runtime Image**
+   
+   * **Conditional Logic:** Similarly, the `ghcr.io/teamiumdev/matlabruntime:r2024a` image is only built if it doesn't exist.
+   * **Dockerfile:** This step uses `Dockerfile.runtime`.
+   * **Purpose :** This layer might add additional dependencies or configuration before packaging the algorithm itself.
+1. **Build Inventory Image**
+   
+   * **Dockerfile:** It uses a dedicated Dockerfile (e.g., `Dockerfile`).
+   * **Image Building:** Bundles the MATLAB algorithm code, along with necessary runtime components, creating the final deployable image.
+   * **Tagging:**
+     * **Version Tag:** The new tag generated in the versioning step is applied.
+     * **'latest' Tag:** This tag offers a convenient reference for deployment.
+1. **Push Inventory Image**
+   
+   * **Destination:** Pushes the newly built image to GHCR, along with its tags, making it available for deployment.
 
-# 5. Testing (Optional)
+## 4.1 Actual code:
 
-* **Unit Tests:** If you have MATLAB unit tests, describe how they are integrated into the pipeline (e.g., in the build stage) and the triggers for test execution.
-* **Integration Tests:** If applicable, outline how broader system-level integration tests are incorporated, ensuring the deployed MATLAB algorithm works within the larger application.
+````yaml
+name: Deploy Images to GHCR and Auto Tag
+on:
+  push:
+    branches:
+      - main
+jobs:
+  push-matlab-algorithm-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: '0'
+    - name: Minor version for each merge
+      id: taggerDryRun
+      uses: anothrNick/github-tag-action@1.69.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: false
+        DRY_RUN: true
+    - name: echo new tag
+      run: |
+        echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
+    - name: echo tag
+      run: |
+        echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
+    - name: echo part
+      run: |
+        echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v4
+    - name: 'Login to GitHub Container Registry'
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+    - name: 'Build runtime base image'
+      run: |
+        if docker manifest inspect ghcr.io/teamiumdev/matlabruntimebase:r2024a
+        then
+          echo "It exists. Skip the build..."
+        else
+          echo "Building new image.."
+          docker build . --file "Dockerfile.deps" --tag ghcr.io/teamiumdev/matlabruntimebase:r2024a
+          docker push ghcr.io/teamiumdev/matlabruntimebase:r2024a
+        fi
+    - name: 'Build runtime image'
+      run: |
+        if docker manifest inspect ghcr.io/teamiumdev/matlabruntime:r2024a
+        then
+          echo "It exists. Skip the build..."
+        else
+          echo "Building new image.."
+          docker build . --file "Dockerfile.runtime" --tag ghcr.io/teamiumdev/matlabruntime:r2024a
+          docker push ghcr.io/teamiumdev/matlabruntime:r2024a
+        fi
+    - name: 'Build Inventory Image'
+      run: docker build . --file Dockerfile --tag ghcr.io/teamiumdev/matlab-algorithm:${{ steps.taggerDryRun.outputs.new_tag }} --tag ghcr.io/teamiumdev/matlab-algorithm:latest
+    - name: Minor version for each merge
+      id: taggerFinal
+      uses: anothrNick/github-tag-action@1.69.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: false
+    - name: 'Push Inventory Image'
+      run: docker push --all-tags ghcr.io/teamiumdev/matlab-algorithm
+````
+
+# 5. Deployment Considerations (Future)
+
+Currently, the CI/CD pipeline concludes with the production of Docker images stored in GitHub Container Registry (GHCR). To fully leverage the benefits of containerization and streamlined deployment, here are potential deployment pathways to consider as the project scales:
+
+**Kubernetes for Orchestration:**
+
+* **Benefits:** Kubernetes is a powerful container orchestration platform ideal for managing complex deployments. Key advantages include:
+  * **Scalability:** Easily deploy multiple instances of your MATLAB image to handle increased load.
+  * **Resilience:** Kubernetes offers self-healing, automatic restarts, and rollout/rollback features for high availability.
+  * **Resource Management:** Optimize resource usage across your application components.
+
+**Deployment Tools:**
+
+* **ArgoCD:** A GitOps deployment tool designed for Kubernetes. Synchronizes the desired state defined in Git with the running Kubernetes cluster for continuous deployment.
+  * **Advantages:** Declarative configuration, automated updates when code changes, enhanced observability.
+* **Jenkins:** A versatile automation server that can be used to orchestrate deployments to Kubernetes.
+  * **Advantages:** Extensible, integrates well with existing pipelines and tools.
+
+**Next Steps:**
+
+1. **Containerization:** Ensure your CI/CD pipeline consistently produces deployment-ready Docker images for your MATLAB algorithm.
+1. **Deployment Manifests:** Craft Kubernetes deployment manifests (YAML files) that define how your MATLAB Algorithm image should be deployed within the cluster (replicas, resource needs, etc.)
+1. **Tool Choice:** Evaluate both ArgoCD and Jenkins, considering factors like team familiarity, desired level of automation, and integration with existing infrastructure.
 
 # 6. Additional Considerations
 
