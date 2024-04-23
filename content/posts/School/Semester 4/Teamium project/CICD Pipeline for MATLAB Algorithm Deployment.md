@@ -23,7 +23,7 @@ footer-left: \thetitle
 footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-04-23T16:53
+updated: 2024-04-23T16:58
 ---
 
 # CI/CD Pipeline for MATLAB Algorithm Deployment
@@ -77,6 +77,8 @@ graph TD
     D --> F[Push Runtime Image]
     E --> F[Push Algorithm Image]
 ````
+
+
 
 # 4. Pipeline Breakdown (Detailed)
 
