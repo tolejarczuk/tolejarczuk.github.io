@@ -9,7 +9,7 @@ title: Microservices notes
 date: 19-04-2024
 ---
 
-# [Microservices](../School/Semester%204/ASML%20project/Microservices.md) notes
+# [Microservices](Microservices.md) notes
 
 ## KEDA
 
