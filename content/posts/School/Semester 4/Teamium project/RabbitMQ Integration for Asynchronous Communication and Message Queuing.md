@@ -23,7 +23,7 @@ footer-left: \thetitle
 footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-05-29T15:09
+updated: 2024-05-29T15:16
 ---
 
 # RabbitMQ Integration for Asynchronous Communication and Message Queuing
@@ -111,6 +111,57 @@ ResQ -->|"Deliver Message (Results)"| Controller
 * **Docker:** Containerization platform for deploying RabbitMQ.
 
 ## 3.3 Configuration
+
+### 3.3.1 Deployment and Orchestration
+
+RabbitMQ is deployed as a container within the same Docker Compose environment as the other components of your system. The `docker-compose.yml` file handles the orchestration, ensuring that RabbitMQ starts up alongside the MATLAB server, API wrapper, database, and MinIO.
+
+The relevant section in `docker-compose.yml` for RabbitMQ is:
+
+````yaml
+rabbitmq:
+image: rabbitmq:3.13-management
+hostname: rabbitmq
+ports:
+    - "5672:5672"  # AMQP protocol port
+    - "15672:15672" # Management UI port
+environment:
+    - RABBITMQ_DEFAULT_USER=$RABBITMQ_USER
+    - RABBITMQ_DEFAULT_PASS=$RABBITMQ_PASS
+networks:
+    - matlab-network
+````
+
+### 3.3.2 Environment Variables (`.env`)
+
+The `.env` file stores sensitive configuration details, including the RabbitMQ credentials:
+
+* `RABBITMQ_USER`: Specifies the username for accessing the RabbitMQ server (default user is set to `teamium`).
+* `RABBITMQ_PASS`: Sets the password for the RabbitMQ user (default password is set to `teamium666`).
+
+### 3.3.3 Key Configuration Details
+
+* **Image:** The `rabbitmq:3.13-management` image is used, which includes the RabbitMQ server and a management plugin for easy monitoring and administration.
+* **Hostname:** The hostname is set to `rabbitmq`, making it easier to reference within the Docker network.
+* **Ports:**
+  * 5672: The standard AMQP port for client connections.
+  * 15672: The port for accessing the RabbitMQ management interface.
+* **Environment Variables:** The `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` variables are used to set the default credentials for the RabbitMQ server.
+* **Networking:** The `matlab-network` bridge network allows the RabbitMQ container to communicate with other containers in the environment.
+
+### 3.3.4 Management Interface
+
+The RabbitMQ management interface, accessible at `http://localhost:15672`, provides a web-based UI for:
+
+* Monitoring queues, exchanges, and connections.
+* Managing users and permissions.
+* Viewing message rates and other statistics.
+
+### 3.3.5 Security Considerations
+
+* **Credentials:** The RabbitMQ credentials (`RABBITMQ_USER` and `RABBITMQ_PASS`) should be kept confidential, as they grant administrative access to the message broker.
+* **Network Security:** Consider restricting access to the RabbitMQ management interface and AMQP port to trusted networks or IP addresses.
+* **TLS:** Enable Transport Layer Security (TLS) to encrypt communication between the API wrapper, MATLAB server, and RabbitMQ.
 
 ---
 
