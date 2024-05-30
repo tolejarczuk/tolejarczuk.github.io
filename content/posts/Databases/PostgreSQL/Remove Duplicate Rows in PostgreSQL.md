@@ -24,7 +24,7 @@ tags:
 - database
 - sql
 - public
-updated: 2024-04-21T22:32
+updated: 2024-05-30T12:16
 ---
 
 # Remove Duplicate Rows in PostgreSQL
@@ -32,8 +32,9 @@ updated: 2024-04-21T22:32
 The provided code snippet offers a way to remove duplicate rows in a PostgreSQL table (named 'enc_history_entries') based on the 'encrypted_data' column. Let's break down the steps:
 
 ````sql
-insert into enc_history_entries_temp(encrypted_data, nonce, device_id, user_id, "date", encrypted_id, read_count)
+CREATE TABLE enc_history_entries_temp (LIKE enc_history_entries INCLUDING ALL);
 
+insert into enc_history_entries_temp(encrypted_data, nonce, device_id, user_id, "date", encrypted_id, read_count)
 select distinct on (encrypted_data) encrypted_data, nonce, device_id, user_id, "date", encrypted_id, read_count from enc_history_entries;
 
 drop table enc_history_entries;
