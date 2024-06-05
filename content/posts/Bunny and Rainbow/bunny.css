@@ -1,0 +1,66 @@
+/* General Styles */
+body {
+    background: transparent !important;
+}
+
+/* Title Styles */
+h1 { /* Assuming title is used as the highest-level heading (H1) */
+    font-family: Lato !important;
+    font-size: 26px !important;
+    color: #000000 !important; /* Black */
+}
+
+/* Subtitle Styles */
+/* You'll need to decide how to target your subtitle in Markdown 
+   (e.g., using a specific heading level or a custom Pandoc extension) */
+h2 { /* Assuming subtitle is represented as H2 */
+    font-family: Lato !important;
+    font-size: 14px !important;
+    color: #595959 !important; /* Gray */
+}
+
+/* Heading Styles */
+h2 { /* Assuming heading_1 is H2 */
+    font-family: Lato !important;
+    font-size: 19px !important;
+    color: #000000 !important; /* Black */
+}
+
+h3 { /* Assuming heading_2 is H3 */
+    font-family: Lato !important;
+    font-size: 17px !important;
+    color: #000000 !important; /* Black */
+}
+
+/* Body Text Styles */
+p { 
+    font-family: Lato !important;
+    font-size: 14px !important;
+    color: #595959 !important; /* Gray */
+}
+
+/* Link Styles */
+a {
+    font-family: Lato !important;
+    font-size: 14px !important;
+    color: #f58e77 !important; /* Orange */
+    word-break: break-word !important;
+}
+
+/* Unordered List Styles */
+ul {
+    list-style-type: square;
+}
+
+ul ul {  /* Nested list */
+    list-style-type: circle;
+}
+
+ul ul ul { /* Deeper nested list */
+    list-style-type: square;
+}
+
+/* Ordered List Styles */
+ol li {
+    font-family: Arial; 
+}
