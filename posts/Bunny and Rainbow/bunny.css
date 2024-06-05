@@ -1,6 +1,8 @@
 /* General Styles */
 body {
     background: transparent !important;
+    font-family: Lato !important;
+    font-size: 12px !important;
 }
 
 /* Title Styles */
