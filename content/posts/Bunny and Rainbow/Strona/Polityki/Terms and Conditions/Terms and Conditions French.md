@@ -21,7 +21,7 @@ footer-left: \thetitle
 footer-center: null
 footer-right: \theauthor
 tags: null
-updated: 2024-06-06T16:24
+updated: 2024-06-06T16:36
 modified: Thursday, 6th June 2024, 11:42:44
 ---
 
@@ -269,6 +269,22 @@ Ces Conditions légales sont régies et interprétées conformément aux lois de
 ### Négociations Informelles
 
 Pour accélérer la résolution et contrôler le coût de tout différend, controverse ou réclamation lié à ces Conditions légales (chacun un "Litige" et collectivement, les "Litiges") porté par vous ou par nous (individuellement, une "Partie" et collectivement, les "Parties"), les Parties conviennent de tenter d'abord de négocier tout Litige (sauf les Litiges expressément prévus ci-dessous) de manière informelle pendant au moins trente (30) jours avant de lancer une procédure d'arbitrage. Ces négociations informelles commencent par une notification écrite d'une Partie à l'autre Partie.
+
+### Arbitrage Contraignant
+
+Tout litige découlant des relations entre les Parties aux présentes Conditions Légales sera tranché par un arbitre qui sera choisi conformément aux Règles d'Arbitrage et de Procédure Interne de la Cour Européenne d'Arbitrage faisant partie du Centre Européen d'Arbitrage dont le siège est à Strasbourg, et qui sont en vigueur au moment du dépôt de la demande d'arbitrage, et dont l'adoption de cette clause constitue acceptation. Le siège de l'arbitrage sera Herentals, Belgique. La langue de la procédure sera l'anglais, le néerlandais. Les règles de droit matériel applicables seront le droit belge.
+
+### Restrictions
+
+Les Parties conviennent que tout arbitrage sera limité au Litige entre les Parties individuellement. Dans toute la mesure permise par la loi, (a) aucun arbitrage ne sera joint à une autre procédure ; (b) il n'existe aucun droit ou autorité pour qu'un Litige soit arbitré sur une base d'action collective ou pour utiliser les procédures d'action collective ; et (c) il n'existe aucun droit ou autorité pour qu'un Litige soit intenté en qualité de représentant putatif au nom du grand public ou de toute autre personne.
+
+### Exceptions à la Négociation Informelle et à l'Arbitrage
+
+Les Parties conviennent que les Litiges suivants ne sont pas soumis aux dispositions ci-dessus concernant la négociation informelle et l'arbitrage contraignant : (a) tout Litige visant à faire valoir ou protéger, ou concernant la validité, de tout droit de propriété intellectuelle d'une Partie ; (b) tout Litige lié à, ou découlant d'allégations de vol, de piratage, d'atteinte à la vie privée ou d'utilisation non autorisée ; et (c) toute demande de mesure injonctive. Si cette disposition est jugée illégale ou inapplicable, alors aucune des Parties ne choisira d'arbitrer un Litige relevant de la partie de cette disposition jugée illégale ou inapplicable et un tel Litige sera tranché par un tribunal compétent parmi les tribunaux énumérés ci-dessus pour la juridiction, et les Parties acceptent de se soumettre à la compétence personnelle de ce tribunal.
+
+## 19. CORRECTIONS
+
+Il peut y avoir sur les Services des informations contenant des erreurs typographiques, des inexactitudes ou des omissions, y compris des descriptions, des prix, des disponibilités et diverses autres informations. Nous nous réservons le droit de corriger toute erreur, inexactitude ou omission et de modifier ou mettre à jour les informations sur les Services à tout moment, sans préavis.
 
 ---
 
